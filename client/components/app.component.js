@@ -1,9 +1,14 @@
 import React , { Component } from 'react';
- 
+import NavBarComponent from './nav.bar.component';
+import routes from './routes';
+
 export default class App extends Component{
     render(){
         return (
-            <h1>Hi</h1>
+            <div className='container'>
+                <NavBarComponent />
+                <div>{routes}</div>
+            </div>
         );
     }
 }
