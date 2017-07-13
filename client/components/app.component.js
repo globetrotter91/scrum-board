@@ -7,7 +7,9 @@ export default class App extends Component{
         return (
             <div className='container'>
                 <NavBarComponent />
-                <div>{routes}</div>
+                <div className='page-header'>
+                    {routes}
+                </div>
             </div>
         );
     }
