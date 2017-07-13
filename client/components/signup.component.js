@@ -23,4 +23,4 @@ SignupComponent.protoTypes = {
     userSignupRequest: React.PropTypes.func.isRequired
 }
 
-export default connect((state) => { return {} }, { userSignupRequest })(SignupComponent)
+export default connect(null, { userSignupRequest })(SignupComponent)
