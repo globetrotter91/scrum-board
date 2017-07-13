@@ -2,6 +2,7 @@ import React, { Component } from 'react' ;
 import { Link } from 'react-router-dom' ;
 import timezones from './../data/timezones';
 import map from 'lodash/map';
+import FormField from './common/form.field' ;
 
 export default class SignupForm extends Component{
 
@@ -32,72 +33,57 @@ export default class SignupForm extends Component{
         const timeZoneOptions = map(timezones, (val, key)=>
             <option key={val} value={val}>{key}</option>
         );
-
+        const linksWithSignUpButton = <Link to='/login' className="btn btn-link">Login</Link> ;
         return (
             <form onSubmit={this.onSubmit}>
-                <div className="form-group">
-                    <label>Name</label>
-                    <input 
-                        type="text" 
-                        className="form-control" 
-                        name="name" 
-                        value={this.state.name} 
-                        onChange={this.onChange}
-                        required />
-                </div>
-                <div className="form-group">
-                    <label>Email</label>
-                    <input 
-                        type="email" 
-                        className="form-control" 
-                        name="email" 
-                        value={this.state.email}
-                        onChange={this.onChange}
-                        required />
-                </div>
-                <div className="form-group">
-                    <label>Password</label>
-                    <input 
-                        type="password" 
-                        className="form-control" 
-                        name="password" 
-                        value={this.state.password}
-                        onChange={this.onChange} 
-                        required />
-                </div>
-                <div className="form-group">
-                    <label>Confirm Password</label>
-                    <input 
-                        type="password" 
-                        className="form-control" 
-                        name="confirmPassword" 
-                        value={this.state.confirmPassword}
-                        onChange={this.onChange}
-                        required />
-                </div>
-                <div className="form-group">
-                    <label>TimeZone</label>
-                    <select 
-                        className='form-control'
-                        name='timeZone'
-                        onChange={this.onChange}
-                        value={this.state.timeZone}
-                        required>
-                        <option value="" disabled>Choose Timezone</option>
-                        {timeZoneOptions}
-                    </select>
-                </div>
-                <div className="form-group">
-                    <button 
-                        className="btn btn-primary">
-                        Register
-                    </button>
-                    <Link 
-                        to='/login' 
-                        className="btn btn-link">
-                        Login
-                    </Link>
-                </div>
+                <FormField 
+                    label='Name' 
+                    type="text" 
+                    name="name" 
+                    value={this.state.name} 
+                    onChange={this.onChange}
+                    required='required'/>
+
+                <FormField 
+                    label='Email' 
+                    type='email' 
+                    name='email' 
+                    value={this.state.email} 
+                    onChange={this.onChange}
+                    required='required'/>
+
+                <FormField 
+                    label='Password' 
+                    type='password' 
+                    name='password'
+                    value={this.state.password} 
+                    onChange={this.onChange}
+                    required='required'/>
+
+                <FormField 
+                    label='Confirm Password' 
+                    type='password'
+                    name='confirmPassword' 
+                    value={this.state.confirmPassword} 
+                    onChange={this.onChange}
+                    required='required'/>    
+                
+                <FormField 
+                    label='Time Zone' 
+                    type='select'
+                    name='timeZone' 
+                    value={this.state.timeZone} 
+                    onChange={this.onChange}
+                    required='required'
+                    options={timeZoneOptions}
+                    />
+                    
+                <FormField 
+                    label='Sign Up' 
+                    type='button'
+                    btnClass='btn-primary'
+                    links={linksWithSignUpButton}
+                    />
             </form>
         );
     }
