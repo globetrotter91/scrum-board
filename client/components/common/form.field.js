@@ -1,4 +1,5 @@
 import React, { Component } from 'react' ;
+import classnames from 'classnames';
 
 export default class FormField extends Component{
 
@@ -9,7 +10,8 @@ export default class FormField extends Component{
             return(
                 
                 <div className="form-group">
-                    <button className={btnClass}>{this.props.label}</button>
+                    <button disabled={this.props.loading} className={btnClass}>
+                        <i className={classnames('hide',{ "fa fa-spinner fa-pulse fa-fw" : this.props.loading} )}></i> {this.props.label}</button>
                     {linksWithButton}
                 </div>                   
                 
@@ -32,7 +34,7 @@ export default class FormField extends Component{
             );        
         }else{
             return(
-                <div className="form-group">
+                <div className={classnames("form-group", { 'has-error': this.props.errors})}>
                     <label>{this.props.label}</label>
                     <input 
                         type={this.props.type} 
@@ -41,6 +43,7 @@ export default class FormField extends Component{
                         value={this.props.value} 
                         onChange={this.props.onChange}
                         required={this.props.required}/>
+                        {this.props.errors && <span className="help-block">{this.props.errors}</span>}
                 </div>
             );
         }

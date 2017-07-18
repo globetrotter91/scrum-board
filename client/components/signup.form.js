@@ -13,7 +13,9 @@ export default class SignupForm extends Component{
             email: '',
             password: '',
             confirmPassword: '', 
-            timeZone: ''
+            timeZone: '', 
+            errors: {}, 
+            isLoading: false
         };
         this.onChange = this.onChange.bind(this) ;
         this.onSubmit = this.onSubmit.bind(this) ;
@@ -26,14 +28,23 @@ export default class SignupForm extends Component{
     }
 
     onSubmit(e){
+        this.setState({ errors : {}, isLoading: true});
         e.preventDefault() ;
-        this.props.userSignupRequest(this.state);
+        this.props.userSignupRequest(this.state).then(
+            ()=>{},
+            (err) => this.setState({
+                errors : err.response.data, 
+                isLoading: false 
+            })
+        );
     }
     render(){
+        const { errors } = this.state; 
         const timeZoneOptions = map(timezones, (val, key)=>
             <option key={val} value={val}>{key}</option>
         );
         const linksWithSignUpButton = <Link to='/login' className="btn btn-link">Login</Link> ;
+
         return (
             <form onSubmit={this.onSubmit}>
                 <FormField 
@@ -42,7 +53,8 @@ export default class SignupForm extends Component{
                     name="name" 
                     value={this.state.name} 
                     onChange={this.onChange}
-                    required='required'/>
+                    errors={this.state.errors.name}
+                    />
 
                 <FormField 
                     label='Email' 
@@ -50,7 +62,9 @@ export default class SignupForm extends Component{
                     name='email' 
                     value={this.state.email} 
                     onChange={this.onChange}
-                    required='required'/>
+                    required='required'
+                    errors={this.state.errors.email}
+                    />
 
                 <FormField 
                     label='Password' 
@@ -58,7 +72,9 @@ export default class SignupForm extends Component{
                     name='password'
                     value={this.state.password} 
                     onChange={this.onChange}
-                    required='required'/>
+                    required='required'
+                    errors={this.state.errors.password}
+                    />
 
                 <FormField 
                     label='Confirm Password' 
@@ -66,7 +82,9 @@ export default class SignupForm extends Component{
                     name='confirmPassword' 
                     value={this.state.confirmPassword} 
                     onChange={this.onChange}
-                    required='required'/>    
+                    required='required'
+                    errors={this.state.errors.confirmPassword}
+                    />    
                 
                 <FormField 
                     label='Time Zone' 
@@ -74,8 +92,8 @@ export default class SignupForm extends Component{
                     name='timeZone' 
                     value={this.state.timeZone} 
                     onChange={this.onChange}
-                    required='required'
                     options={timeZoneOptions}
+                    errors={this.state.errors.timeZone}
                     />
                     
                 <FormField 
@@ -83,6 +101,7 @@ export default class SignupForm extends Component{
                     type='button'
                     btnClass='btn-primary'
                     links={linksWithSignUpButton}
+                    loading={this.state.isLoading}
                     />
             </form>
         );
