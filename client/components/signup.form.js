@@ -5,10 +5,11 @@ import map from 'lodash/map';
 import FormField from './common/form.field' ;
 import validateInput from './../../server/shared/validations/signup'; 
 
-export default class SignupForm extends Component{
 
-    constructor(){
-        super();
+class SignupForm extends Component{
+
+    constructor(props){
+        super(props);
         this.state = {
             name: '',
             email: '',
@@ -41,7 +42,18 @@ export default class SignupForm extends Component{
         if(this.isValid()){
             this.setState({ errors : {}, isLoading: true});
             this.props.userSignupRequest(this.state).then(
-                ()=>{},
+                ()=>{
+                    this.setState({
+                        isLoading: false 
+                    })
+                    this.props.addFlashMessage({
+                        type: 'success',
+                        text: 'You have signed up successfully'
+                    })
+
+                    this.props.history.push('/home')
+                    
+                },
                 (err) => this.setState({
                     errors : err.response.data, 
                     isLoading: false 
@@ -118,3 +130,6 @@ export default class SignupForm extends Component{
         );
     }
 }
+
+
+export default SignupForm;

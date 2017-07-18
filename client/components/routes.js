@@ -8,6 +8,7 @@ import ForgotPasswordComponent from './forgot.password.component' ;
 const AppRoutes = () => (
   <Switch>
       <Route exact path='/' component={HomeComponent} />
+      <Route path='/home' component={HomeComponent} />
       <Route path='/signup' component={SignupComponent} />
       <Route path='/login' component={LoginComponent} />
       <Route path='/forgot-password' component={ForgotPasswordComponent} />
