@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom' ;
 import timezones from './../data/timezones';
 import map from 'lodash/map';
 import FormField from './common/form.field' ;
+import validateInput from './../../server/shared/validations/signup'; 
 
 export default class SignupForm extends Component{
 
@@ -27,16 +28,26 @@ export default class SignupForm extends Component{
         })
     }
 
+    isValid(){
+        const { errors, isValid } = validateInput(this.state) ; 
+        if(!isValid){
+            this.setState({ errors });
+        }
+
+        return isValid ;
+    }
     onSubmit(e){
-        this.setState({ errors : {}, isLoading: true});
         e.preventDefault() ;
-        this.props.userSignupRequest(this.state).then(
-            ()=>{},
-            (err) => this.setState({
-                errors : err.response.data, 
-                isLoading: false 
-            })
-        );
+        if(this.isValid()){
+            this.setState({ errors : {}, isLoading: true});
+            this.props.userSignupRequest(this.state).then(
+                ()=>{},
+                (err) => this.setState({
+                    errors : err.response.data, 
+                    isLoading: false 
+                })
+            );
+        }
     }
     render(){
         const { errors } = this.state; 
