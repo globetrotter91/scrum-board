@@ -1,9 +1,9 @@
 import React from 'react'; 
 import { Switch, Route , IndexRoute } from 'react-router' ;
-import HomeComponent from './home.component';
-import SignupComponent from './signup.component';
-import LoginComponent from './login.component';
-import ForgotPasswordComponent from './forgot.password.component' ;
+import HomeComponent from './home/home.component';
+import SignupComponent from './account/signup.component';
+import LoginComponent from './account/login.component';
+import ForgotPasswordComponent from './account/forgot.password.component' ;
 
 const AppRoutes = () => (
   <Switch>

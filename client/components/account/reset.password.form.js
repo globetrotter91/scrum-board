@@ -1,6 +1,6 @@
 import React, { Component } from 'react' ; 
 import { Link } from 'react-router-dom' ;
-import FormField from './common/form.field' ;
+import FormField from './../common/form.field' ;
 
 export default class ResetPasswordForm extends Component{
 

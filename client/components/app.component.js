@@ -1,7 +1,7 @@
 import React , { Component } from 'react';
-import NavBarComponent from './nav.bar.component';
+import NavBarComponent from './common/nav.bar.component';
 import routes from './routes';
-import FlashMessagesComponent from './flash.messages.component';
+import FlashMessagesComponent from './common/alert/flash.messages.component';
 
 export default class App extends Component{
     render(){

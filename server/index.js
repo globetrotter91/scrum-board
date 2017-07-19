@@ -6,12 +6,25 @@ import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config.dev';
 
-import users from './routes/users';
+import mongoose from 'mongoose' ;
+import config from './config' ;
+import routesForApp from './routes';
+
+mongoose.connect(config.dbString, (err, res)=>{
+  if (err){ // connection failed
+    console.log('DB Connection Failed')
+  }
+  else {
+    console.log('DB Connection Successful: '+config.dbString)
+  }
+})
+
+
 let app = express();
 
 app.use(bodyParser.json());
 
-app.use('/api/users', users);
+routesForApp(app); 
 
 const compiler = webpack(webpackConfig);
 app.use(webpackMiddleware(compiler,{

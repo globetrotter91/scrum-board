@@ -10,7 +10,7 @@ export default class FormField extends Component{
             return(
                 
                 <div className="form-group">
-                    <button disabled={this.props.loading} className={btnClass}>
+                    <button disabled={this.props.disabledItems} className={btnClass}>
                         <i className={classnames('hide',{ "fa fa-spinner fa-pulse fa-fw" : this.props.loading} )}></i> {this.props.label}</button>
                     {linksWithButton}
                 </div>                   
@@ -42,6 +42,7 @@ export default class FormField extends Component{
                         name={this.props.name} 
                         value={this.props.value} 
                         onChange={this.props.onChange}
+                        onBlur = {this.props.checkUserExists}
                         required={this.props.required}/>
                         {this.props.errors && <span className="help-block">{this.props.errors}</span>}
                 </div>

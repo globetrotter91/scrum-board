@@ -1,9 +1,9 @@
 import React, { Component } from 'react' ; 
 import { Link } from 'react-router-dom' ;
-import timezones from './../data/timezones';
+import timezones from './../../data/timezones';
 import map from 'lodash/map';
-import FormField from './common/form.field' ;
-import validateInput from './../../server/shared/validations/signup'; 
+import FormField from './../common/form.field' ;
+import validateInput from './../../../server/shared/validations/signup'; 
 
 
 class SignupForm extends Component{
@@ -15,12 +15,13 @@ class SignupForm extends Component{
             email: '',
             password: '',
             confirmPassword: '', 
-            timeZone: '', 
             errors: {}, 
-            isLoading: false
+            isLoading: false, 
+            invalid: false
         };
         this.onChange = this.onChange.bind(this) ;
         this.onSubmit = this.onSubmit.bind(this) ;
+        this.checkUserExists = this.checkUserExists.bind(this) ;
     }
 
     onChange(e){
@@ -37,6 +38,28 @@ class SignupForm extends Component{
 
         return isValid ;
     }
+
+    checkUserExists(e){
+        const field = e.target.name; 
+        const val = e.target.value; 
+        if(val!==''){
+            this.props.isUserExists(val).then(res=>{
+                let errors = this.state.errors; 
+                let invalid;
+                if(res.data.exists){
+                    errors[field]='Another user exists with this email';
+                    invalid = true ;
+                }else{
+                    errors[field] = '';
+                    invalid = false ;
+                } 
+                this.setState({ errors, invalid }); 
+            })
+
+        }
+    }
+
+
     onSubmit(e){
         e.preventDefault() ;
         if(this.isValid()){
@@ -63,9 +86,6 @@ class SignupForm extends Component{
     }
     render(){
         const { errors } = this.state; 
-        const timeZoneOptions = map(timezones, (val, key)=>
-            <option key={val} value={val}>{key}</option>
-        );
         const linksWithSignUpButton = <Link to='/login' className="btn btn-link">Login</Link> ;
 
         return (
@@ -85,6 +105,7 @@ class SignupForm extends Component{
                     name='email' 
                     value={this.state.email} 
                     onChange={this.onChange}
+                    checkUserExists={this.checkUserExists}
                     required='required'
                     errors={this.state.errors.email}
                     />
@@ -108,23 +129,14 @@ class SignupForm extends Component{
                     required='required'
                     errors={this.state.errors.confirmPassword}
                     />    
-                
-                <FormField 
-                    label='Time Zone' 
-                    type='select'
-                    name='timeZone' 
-                    value={this.state.timeZone} 
-                    onChange={this.onChange}
-                    options={timeZoneOptions}
-                    errors={this.state.errors.timeZone}
-                    />
-                    
+                                 
                 <FormField 
                     label='Sign Up' 
                     type='button'
                     btnClass='btn-primary'
                     links={linksWithSignUpButton}
                     loading={this.state.isLoading}
+                    disabledItems={this.state.isLoading || this.state.invalid}
                     />
             </form>
         );
