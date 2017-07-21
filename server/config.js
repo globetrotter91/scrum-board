@@ -1,3 +1,4 @@
 export default {
-    dbString: 'mongodb://localhost:27017/hexapp' 
+    dbString: 'mongodb://localhost:27017/hexapp', 
+    jwtSecret: 'somesecretkeyrightnow'
 }

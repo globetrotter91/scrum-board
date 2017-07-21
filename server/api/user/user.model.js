@@ -20,6 +20,7 @@ const UserSchema = new Schema({
         type: Boolean,
         default: false
     },
+    team: { type: Schema.Types.ObjectId, ref: 'Team'},
     dateCreated: {
         type: Date,
         default: Date.now()
@@ -46,6 +47,7 @@ UserSchema
             name: this.name,
             role: this.role,
             email: this.email,
+            team : this.team, 
             dateCreated: this.dateCreated
         };
     });

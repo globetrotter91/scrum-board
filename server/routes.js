@@ -1,13 +1,13 @@
 import userRoute from './api/user';
+import authRoute from './api/auth';
+import boardRoute from './api/board';
+
 import path from 'path'; 
 
 export default function(app) {
 
-  app.use('/api/users', userRoute);
-/*
-  var indexFn = function(req, res) {
-    return res.sendFile(path.join(__dirname, './index.html'));
-  };
-  app.route('/*').get(indexFn);
-  */
+    app.use('/api/board', boardRoute);
+    app.use('/api/users', userRoute);
+    app.use('/api/auth', authRoute);
+
 };

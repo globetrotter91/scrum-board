@@ -7,7 +7,7 @@ export default class LoginComponent extends Component{
             <div className="row">
                 <div className="col-md-6 col-md-offset-3">
                     <h2>Sign In</h2>
-                    <LoginForm />
+                    <LoginForm history={this.props.history}/>
                 </div>
             </div>
         )

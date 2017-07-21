@@ -15,7 +15,11 @@ class SignupComponent extends Component{
             <div className="row">
                 <div className="col-md-6 col-md-offset-3">
                     <h2>Sign Up</h2>
-                    <SignupForm isUserExists={isUserExists} userSignupRequest={userSignupRequest} addFlashMessage={addFlashMessage} history={history}/>
+                    <SignupForm 
+                        isUserExists={isUserExists} 
+                        userSignupRequest={userSignupRequest} 
+                        addFlashMessage={addFlashMessage} 
+                        history={history}/>
                 </div>
             </div>
         )
