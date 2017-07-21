@@ -74,7 +74,7 @@ class SignupForm extends Component{
                         text: 'You have signed up successfully'
                     })
 
-                    this.props.history.push('/home')
+                    this.context.router.history.push('/home')
                     
                 },
                 (err) => this.setState({
@@ -143,5 +143,9 @@ class SignupForm extends Component{
     }
 }
 
+
+SignupForm.contextTypes = {
+    router: React.PropTypes.object.isRequired
+}
 
 export default SignupForm;

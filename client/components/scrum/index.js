@@ -7,10 +7,10 @@ export default class ScrumComponent extends Component {
         return(
             <div className='row'>
 
-                <AddBoardComponent history={this.props.history}/>
+                <AddBoardComponent />
                 <div className='col-md-12'>
                     <h3>You Scrum Boards</h3>
-                    <BoardListComponent history={this.props.history}/>
+                    <BoardListComponent/>
                 </div>
                 
                 

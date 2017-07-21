@@ -32,7 +32,7 @@ class NavBarComponent extends Component{
 
         return (
             <div className={classnames('navbar navbar-fixed-top', {'navbar-default': !isAuthenticated,'navbar-inverse': isAuthenticated})}>
-                <div className="container">
+                <div className="container-custom">
                     <div className="navbar-header">
                         <Link to="/" className='navbar-brand'>Scrum Board</Link>
                         

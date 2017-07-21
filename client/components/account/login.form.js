@@ -4,10 +4,8 @@ import FormField from './../common/form.field' ;
 import validateInput from './../../../server/shared/validations/login';
 import { login } from './../../actions/auth.actions';
 import { connect } from 'react-redux'; 
-import { createHashHistory } from 'history'
-const history = createHashHistory();
 
- class LoginForm extends Component{
+class LoginForm extends Component{
 
     constructor(){
         super();
@@ -40,14 +38,13 @@ const history = createHashHistory();
         if(this.isValid()){
             this.setState({ errors: {}, isLoading: true}); 
             this.props.login(this.state).then(
-                (res) => this.props.history.push('/home'),
+                (res) => this.context.router.history.push('/home'),
                 (err) => {
                     console.log('err is ',err); 
                     this.setState({ errors: err.response.data.errors, isLoading: false})  
                 }
             )
         }
-        //console.log(this.state) ;
     }
     render(){
         
@@ -87,7 +84,10 @@ const history = createHashHistory();
 }
 LoginForm.propTypes = {
     login: React.PropTypes.func.isRequired, 
-//    history: React.PropTypes.func.isRequired,
+}
+LoginForm.contextTypes = {
+        router: React.PropTypes.object.isRequired
 }
 
-export default connect(null, { login, history })(LoginForm);
+
+export default connect(null, { login })(LoginForm);

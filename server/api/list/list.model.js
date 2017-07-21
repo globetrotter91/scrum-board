@@ -1,5 +1,5 @@
 import mongoose from 'mongoose' ;
-let Schema = mongoosee.Schema;
+let Schema = mongoose.Schema;
 
 const ListSchema = new Schema({
     listName: {
@@ -8,7 +8,7 @@ const ListSchema = new Schema({
     },
     isPrivate: { type: Boolean, default: false },
     user: { type: Schema.Types.ObjectId, ref: 'User', required: true, index: true},
-    team: { type: Schema.Types.ObjectId, ref: 'Team', required: true, index: true},
+    team: { type: Schema.Types.ObjectId, ref: 'Team', index: true},
     boardId: { type: Schema.Types.ObjectId, ref: 'Board', required: true, index: true },
     dateCreated: {
         type: Date,

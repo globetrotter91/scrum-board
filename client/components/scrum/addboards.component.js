@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 import FormField from './../common/form.field' ;
 import { connect } from 'react-redux' ;
 import { createBoard } from './../../actions/board.actions';
-import { createHashHistory } from 'history'
-const history = createHashHistory();
 
 
 class AddBoardComponent extends Component{
@@ -29,7 +27,7 @@ class AddBoardComponent extends Component{
     onSubmit(e){
         e.preventDefault();
         this.props.createBoard(this.state).then(
-            res => this.props.history.push('/board/'+res.data.board._id),            
+            res => this.context.router.history.push('/board/'+res.data.board._id),            
             err => {
                 this.setState({ errors: err.response.data.errors });
             }
@@ -70,4 +68,10 @@ AddBoardComponent.propTypes = {
     createBoard: React.PropTypes.func.isRequired
 }
 
-export default connect(null , { createBoard , history })(AddBoardComponent)
+AddBoardComponent.contextTypes = {
+    router: React.PropTypes.object.isRequired
+}
+
+
+
+export default connect(null , { createBoard })(AddBoardComponent)

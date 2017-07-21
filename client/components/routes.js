@@ -8,11 +8,10 @@ import ScrumComponent from './scrum/index' ;
 import BoardComponent from './scrum/board.component' ;
 import AuthenticateComponent from './../utils/authenticate.component'; 
 
-
 const AppRoutes = () => (
   <Switch>
-      <Route exact path='/' component={HomeComponent} />
-      <Route path='/home' component={HomeComponent} />
+      <Route exact path='/' component={AuthenticateComponent(ScrumComponent)} />
+      <Route path='/home' component={AuthenticateComponent(ScrumComponent)} />
       <Route path='/signup' component={SignupComponent} />
       <Route path='/login' component={LoginComponent} />
       <Route path='/forgot-password' component={ForgotPasswordComponent} />

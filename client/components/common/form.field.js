@@ -42,7 +42,9 @@ export default class FormField extends Component{
                         name={this.props.name} 
                         value={this.props.value} 
                         onChange={this.props.onChange}
-                        onBlur = {this.props.checkUserExists}
+                        onBlur= {this.props.checkUserExists}
+                        placeholder= {this.props.placeholder}
+                        autoFocus={this.props.autofocus}
                         required={this.props.required}/>
                         {this.props.errors && <span className="help-block">{this.props.errors}</span>}
                 </div>

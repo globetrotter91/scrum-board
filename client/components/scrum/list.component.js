@@ -1,36 +1,61 @@
 import React, { Component } from 'react' ;
 import CardComponent from './card.component';
+import { listCards } from './../../data/api.service'; 
+import AddCardComponent from './add.card.component'; 
+
 
 class ListComponent extends Component{
     constructor(props){
         super(props);
         this.state={
             listData: props.listInfo, 
-            cards: [
-                {id: 1, name: 'Hello 1', description: 'there is a board bitch1'},
-                {id: 2, name: 'Hello 2', description: 'there is a board bitch2'},
-                {id: 3, name: 'Hello 3', description: 'there is a board bitch3'},
-                {id: 4, name: 'Hello 4', description: 'there is a board bitch4'},
-                {id: 5, name: 'Hello 5', description: 'there is a board bitch5'},
-                {id: 6, name: 'Hello 6', description: 'there is a board bitch6'}
-            ]
+            addNewCard: false, 
+            cards: []
         }
+    }
+    componentDidMount(){
+		listCards(this.props.listInfo._id).then(
+            res=>this.setState({cards: res.data.cards}),
+            err=>this.setState({ errors: err.response.data.errors})
+        ); 
+    }
+    
+    reloadCards(e){
+        
+        this.setState({
+            addNewCard: false
+        })
+        listCards(this.props.listInfo._id).then(
+            res=>this.setState({cards: res.data.cards}),
+            err=>this.setState({ errors: err.response.data.errors})
+        );
+    }
+
+    addNewCard(e){
+        e.preventDefault(); 
+        this.setState({
+            addNewCard: !this.state.addNewCard
+        })
     }
     render(){
 
         const cardsInLIst = this.state.cards.map((card,i)=>{
             return(
-                <CardComponent cardInfo = {card} key={i}/>
+                <CardComponent cardInfo={card} key={i}/>
             );
         })
         
         return (
-            <div className="panel panel-default">
-                <div className="panel-heading">{this.state.listData.name}</div>
+            <div className="panel panel-default list-main">
+                <div className="panel-heading">{this.state.listData.listName}</div>
                 <div className="panel-body">
-                    <div className="list-group">
+                    <div className="list-group cards-list">
                         {cardsInLIst}
+                        {this.state.addNewCard &&  <AddCardComponent reloadCards={this.reloadCards.bind(this)} boardId={this.state.listData.boardId} listId={this.state.listData._id}/>}
                     </div>
+                </div>
+                <div className="panel-heading">
+                    <a href="#" className='pull-right' onClick={this.addNewCard.bind(this)} >Add Card</a>
                 </div>
             </div>
         )

@@ -37,5 +37,17 @@ controller.getAll = (req, res) => {
 }
 
 
+controller.getOne = (req, res) => {
+
+    return Board.findByIdAsync(req.params.id)
+        .then(board=>{
+            return res.status(200).json({success: true, board: board});
+        })
+        .catch(err=>{
+            console.log(err); 
+            return res.status(500).json({errors: {boardName: 'Some Problem Occured'}}) ;    
+        })
+}
+
 
 export default controller

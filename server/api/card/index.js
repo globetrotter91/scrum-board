@@ -1,5 +1,5 @@
 import express from 'express' ; 
-import controller from './board.controller';
+import controller from './card.controller';
 import { isAuthenticated } from './../services/auth.service'; 
 
 let router = express.Router();

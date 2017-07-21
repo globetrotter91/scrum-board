@@ -6,7 +6,7 @@ import FlashMessagesComponent from './common/alert/flash.messages.component';
 export default class App extends Component{
     render(){
         return (
-            <div className='container'>
+            <div className='container-custom'>
                 <NavBarComponent />
                 <FlashMessagesComponent />
                 <div className='page-header'>
