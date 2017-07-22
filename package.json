@@ -32,6 +32,7 @@
     "jsonwebtoken": "^7.4.1",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "mongoose": "^4.11.3",
     "react": "^15.6.1",
     "react-bootstrap": "^0.31.1",

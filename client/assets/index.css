@@ -8607,7 +8607,7 @@ input[type="checkbox"] {
 }
 
 .list-container .list-main{
-    background: #E2E4E6;
+    background: #EFEFEF;
     border-radius: 3px;
     box-sizing: border-box;
     display: flex;
@@ -8648,12 +8648,18 @@ a.card-href{
     background-color: #fff;
     border: 1px solid #ddd;
     margin-bottom: 10px;
+    box-shadow: 10px 10px 10px rgba(125, 125, 125, 0);
 }
 a.card-href:focus{
     outline: 0px auto !important;
     outline-offset: 0px;
+    background: #ffffff; 
 }
 
+a.card-href:hover{
+    border: 2px #ccc solid; 
+    background: #ffffff; 
+}
 .list-main .panel-body{
   padding:10px 5px;
 }
@@ -8870,4 +8876,21 @@ td.rdtYear:hover {
   width: 100%;
   font-size: 1.2em;
   margin-top: 37px;
+}
+
+/*---------- back -----*/
+
+.heading-card{
+  border: none; 
+}
+.heading-card:focus{
+  outline: 0px; 
+  border: none;
+  box-shadow: none; 
+  
+}
+
+
+.head-group{
+  width: 90%; 
 }

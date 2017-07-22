@@ -39,13 +39,25 @@ controller.getAll = (req, res) => {
 controller.getOne = (req, res) => {
 
     return Card.findByIdAsync(req.params.id)
-        .then(list=>{
+        .then(card=>{
             return res.status(200).json({success: true, card: card});
         })
         .catch(err=>{
             console.log(err); 
             return res.status(500).json({errors: {form: 'Some Problem Occured'}}) ;    
         })
+}
+
+controller.updateOne = (req, res) => {
+
+    Card.findByIdAndUpdate(req.params.id, req.body, {new:true}, function(err, card){
+			if (err){
+				console.log(err); 
+                return res.status(500).json({errors: {form: 'Some Problem Occured'}}) ;    
+			}
+
+			return res.status(200).json({success: true, card: card});
+		})
 }
 
 

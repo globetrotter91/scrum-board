@@ -7,3 +7,10 @@ export function createCard(data){
         return axios.post('/api/card', data);
     }
 }
+
+
+export function updateCard(id, data){
+    return dispatch => {
+        return axios.patch('/api/card/'+id, data)
+    }
+}

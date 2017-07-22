@@ -5,6 +5,7 @@ import { isAuthenticated } from './../services/auth.service';
 let router = express.Router();
 
 router.get('/:id', isAuthenticated, controller.getOne);
+router.patch('/:id', isAuthenticated, controller.updateOne);
 router.post('/', isAuthenticated, controller.create);
 router.get('/', isAuthenticated, controller.getAll);
 

@@ -3,6 +3,8 @@ import ListComponent from './list.component';
 import AddListComponent from './add.list.component';
 import { listLists } from './../../data/api.service'; 
 import { connect } from 'react-redux'; 
+import HTML5Backend from 'react-dnd-html5-backend';
+import { DragDropContext } from 'react-dnd';
 
 class ListsComponent extends Component{
     constructor(props){
@@ -31,11 +33,18 @@ class ListsComponent extends Component{
         ); 
     }
 
+    handleDrop(list) {
+        //const { name } =;
+        console.log('dropped in', list); 
+
+        
+    }
+
     render(){
         const listsInBoard = this.state.lists.map((list, i)=>{
             return(
                 <div key={i} className='list-container'>
-                    <ListComponent listInfo={list} />                    
+                    <ListComponent listInfo={list} canDrop={true} onDrop={item => this.handleDrop(list)} />                    
                 </div>
             );
         });
@@ -49,18 +58,5 @@ class ListsComponent extends Component{
         )
     }
 }
-/*
-ListsComponent.propTypes = {
-    boardInfo: React.PropTypes.object.isRequired
-}
 
-
-function mapStateToProps(state){
-    return {
-        boardInfo : state.board.currentBoard
-    }
-}
-*/
-export default ListsComponent
-
-//export default connect(mapStateToProps)(ListsComponent)
+export default DragDropContext(HTML5Backend)(ListsComponent);
