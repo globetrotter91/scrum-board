@@ -7,10 +7,10 @@ export default function(ComposedComponent){
     class AuthenticateComponent extends Component{
         componentWillMount() {
             if(!this.props.isAuthenticated){
-                this.props.addFlashMessage({
+                /*this.props.addFlashMessage({
                     type: 'error', 
                     text: 'Login to continue'
-                })
+                })*/
                 this.context.router.history.push('/login');
             }
         }

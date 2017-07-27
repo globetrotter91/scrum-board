@@ -1,14 +1,20 @@
 {
-  "name": "hex",
+  "name": "scrumboard",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --watch server --exec babel-node -- server/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js", 
+    "dev": "nodemon --watch server --exec babel-node -- server/dev.js",
+    "test": "echo \"Error: no test specified\" && exit 1", 
+    "clean": "rm -rf build && mkdir build", 
+    "build-server": "babel -d ./build ./server && rm build/dev.js", 
+    "build": "npm run clean && npm run build-server", 
+    "start-s": "node --debug ./build/index.js", 
+    "build-client": "webpack --config webpack.config.prod.js && cp -r client/assets build/public && cp server/index.html build/public/index.html"
   },
   "keywords": [],
-  "author": "",
+  "author": "Satyam Saxena",
   "license": "ISC",
   "devDependencies": {
     "babel-cli": "^6.24.1",
@@ -47,5 +53,8 @@
     "shortid": "^2.2.8",
     "style-loader": "^0.18.2",
     "validator": "^8.0.0"
+  }, 
+  "engines": {
+    "node": "6.10.1"
   }
 }

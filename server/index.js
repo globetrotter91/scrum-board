@@ -1,16 +1,11 @@
 import express from 'express';
 import path from 'path';
 import bodyParser from 'body-parser';
-import webpack from 'webpack';
-import webpackMiddleware from 'webpack-dev-middleware';
-import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpackConfig from '../webpack.config.dev';
-
 import mongoose from 'mongoose' ;
 import config from './config' ;
 import routesForApp from './routes';
 
-mongoose.connect(config.dbString, (err, res)=>{
+mongoose.connect(config.prod.dbString, (err, res)=>{
   if (err){ // connection failed
     console.log('DB Connection Failed')
   }
@@ -23,18 +18,11 @@ mongoose.connect(config.dbString, (err, res)=>{
 let app = express();
 
 app.use(bodyParser.json());
-
+app.use(express.static(path.join(__dirname, 'public')));
 routesForApp(app); 
 
-const compiler = webpack(webpackConfig);
-app.use(webpackMiddleware(compiler,{
-    hot: true, 
-    publicPath: webpackConfig.output.publicPath, 
-    noInfo:  true
-}));
-app.use(webpackHotMiddleware(compiler));
 app.get('/*', (req, res)=> {
-    res.sendFile(path.join(__dirname, './index.html'));
+    res.sendFile(path.join(__dirname, './public/index.html'));
 })
 
-app.listen(8080, () => console.log('Listening on 8080'));
+app.listen(config.port, () => console.log('Listening on somewhere'));

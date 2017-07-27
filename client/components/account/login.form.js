@@ -1,7 +1,7 @@
 import React, { Component } from 'react' ; 
 import { Link } from 'react-router-dom' ;
 import FormField from './../common/form.field' ;
-import validateInput from './../../../server/shared/validations/login';
+//import validateInput from './../../../server/shared/validations/login';
 import { login } from './../../actions/auth.actions';
 import { connect } from 'react-redux'; 
 
@@ -26,11 +26,11 @@ class LoginForm extends Component{
     }
 
     isValid(){
-        const { errors, isValid} = validateInput(this.state); 
-        if(!isValid){
-            this.setState({ errors }); 
-        }
-        return isValid ;
+        //const { errors, isValid} = validateInput(this.state); 
+//        if(!isValid){
+  //          this.setState({ errors }); 
+    //    }
+        return true ;
     }
 
     onSubmit(e){
